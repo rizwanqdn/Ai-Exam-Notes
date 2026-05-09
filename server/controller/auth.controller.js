@@ -27,9 +27,10 @@ export const logOut = async (req, res) => {
     // 1. Use res.clearCookie to remove the token from the browser
     // The options (httpOnly, sameSite) should match how the cookie was created
     res.clearCookie("token", {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+     httpOnly: true,
+      secure: true,       // Matched with googleAuth
+      sameSite: "none",   // Matched with googleAuth
+      path: "/",
     });
 
     // 2. Send the response back to the client
