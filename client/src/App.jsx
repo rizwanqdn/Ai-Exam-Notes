@@ -11,7 +11,7 @@ import Notes from "./pages/Notes";
 import ViewNote from "./pages/viewNote";
 import Diagrams from "./pages/diagrams";
 
-export const serverUrl = "http://localhost:8000";
+export const serverUrl = "https://ai-exam-notes-server.onrender.com";
 
 function App() {
   const dispatch = useDispatch();
