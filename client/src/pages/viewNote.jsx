@@ -20,8 +20,8 @@ import {
 // Colors for the Recharts Pie Chart
 const COLORS = ["#3b82f6", "#8b5cf6", "#10b981", "#f59e0b", "#ef4444"];
 
-function ViewNote() {
-  const { id } = useParams(); // Gets the note ID from the URL
+function ViewNote({ id }) {
+  // const { id } = useParams(); // Gets the note ID from the URL
   const navigate = useNavigate();
   const { userData } = useSelector((state) => state.user);
 
@@ -81,65 +81,9 @@ function ViewNote() {
   };
 
   return (
-    <div className="min-h-screen bg-[#f3f4f6] p-6 md:p-10 font-sans flex flex-col">
-      {/* HEADER */}
-      <motion.div
-        initial={{ opacity: 0, y: -40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="fixed top-0 left-0 md:p-10 p-4 right-0 z-50 flex justify-center px-4"
-      >
-        <div className="w-full max-w-[1600px] bg-gradient-to-b from-black/80 via-gray-900/95 to-black border-t backdrop-blur-md border border-white/10 text-white px-6 py-3 rounded-2xl flex justify-between items-center shadow-2xl">
-          <div
-            className="flex items-center gap-2 font-bold text-xl cursor-pointer"
-            onClick={() => navigate("/")}
-          >
-            <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-xs">
-              🚀
-            </div>
-            <div className="flex text-sm md:text-md flex-col ">
-              ExamNotes AI{" "}
-              <span className="text-xs text-gray-400 font-normal">
-                Study Material Viewer
-              </span>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-6">
-            {userData && (
-              <div className="flex flex-col-reverse md:flex-row items-center gap-4">
-                <button
-                  onClick={() => navigate("/credits")}
-                  className="bg-white/10 px-3 py-1 rounded-full text-sm flex items-center gap-2 hover:bg-white/20 transition active:scale-95"
-                >
-                  <span className="text-blue-400">◆</span>{" "}
-                  {userData.credits || 0}{" "}
-                  <span className="bg-white/20 rounded-full px-1 text-[10px]">
-                    +
-                  </span>
-                </button>
-                <button
-                  onClick={() => navigate("/history")}
-                  className="bg-white/10 px-3 py-1 rounded-full text-xs flex items-center gap-2 hover:bg-white/20 transition active:scale-95 "
-                >
-                  <TbNotes size={20} className="text-blue-400" /> History
-                </button>
-              </div>
-            )}
-          </div>
-        </div>
-      </motion.div>
-
+    <div className="min-h-screen    font-sans flex flex-col">
       {/* MAIN CONTENT AREA */}
-      <div className="mx-auto w-full max-w-[1200px] mt-32 md:mt-36 mb-10">
-        {/* Back Button */}
-        <button
-          onClick={() => navigate(-1)}
-          className="flex items-center gap-2 text-gray-500 hover:text-gray-900 font-medium transition mb-6 px-2"
-        >
-          <IoArrowBackOutline size={20} /> Back to History
-        </button>
-
+      <div className="mx-auto w-full max-w-[1200px]">
         {/* LOADING STATE */}
         {loading && (
           <div className="flex flex-col items-center justify-center min-h-[400px] bg-white rounded-3xl shadow-sm border border-gray-100">
@@ -174,7 +118,7 @@ function ViewNote() {
             className="flex flex-col gap-8"
           >
             {/* Header Block */}
-            <div className="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div className="bg-white rounded-3xl p-5  flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
               <div>
                 <h1 className="text-4xl font-bold text-gray-900 capitalize mb-3">
                   {note.topic}
@@ -208,9 +152,9 @@ function ViewNote() {
               )}
             </div>
 
-            <div className="flex flex-col md:flex-row gap-6 items-start">
+            <div className="flex flex-col w-full md:flex-row gap-2 items-start">
               {/* LEFT COLUMN: Subtopics & Short Questions */}
-              <div className="w-full md:w-1/3 space-y-6 md:sticky md:top-36">
+              <div className="w-full md:w-1/3 space-y-2 ">
                 {/* SubTopics */}
                 {note.content?.subTopics && (
                   <div className="bg-white rounded-3xl p-6 border border-gray-100 shadow-sm">
@@ -221,7 +165,7 @@ function ViewNote() {
                       {Object.entries(note.content.subTopics).map(
                         ([star, topics]) => (
                           <div key={star}>
-                            <p className="font-bold text-gray-700 mb-2">
+                            <p className="font-bold text-gray-700 mb-1">
                               {star} Priority
                             </p>
                             <ul className="pl-4 border-l-2 border-gray-100 space-y-2">
@@ -243,11 +187,11 @@ function ViewNote() {
 
                 {/* Short Questions */}
                 {note.content?.questions?.short && (
-                  <div className="bg-amber-50 rounded-3xl p-6 border border-amber-100 shadow-sm">
-                    <h2 className="text-lg font-bold text-amber-900 mb-4 border-b border-amber-200 pb-2">
+                  <div className="bg-amber-50 rounded-3xl p-3 border border-amber-100 shadow-sm">
+                    <h2 className="text-lg font-bold text-amber-900 mb-2 border-b border-amber-200 pb-2">
                       Short Questions
                     </h2>
-                    <div className="space-y-3">
+                    <div className="space-y-2">
                       {note.content.questions.short.map((short, i) => (
                         <div
                           key={i}
@@ -265,14 +209,14 @@ function ViewNote() {
               </div>
 
               {/* RIGHT COLUMN: Detailed Notes, Revision, Long Questions, Diagrams, Charts */}
-              <div className="flex-1 w-full space-y-6">
+              <div className="flex-1 w-full space-y-2">
                 {/* Detailed Notes */}
                 {note.content?.notes && (
                   <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm">
                     <h2 className="text-2xl font-bold text-indigo-800 mb-6 flex items-center gap-2">
                       <TbNotes /> Detailed Study Notes
                     </h2>
-                    <div className="whitespace-pre-wrap text-gray-700 leading-relaxed font-medium text-[15px]">
+                    <div className="whitespace-pre-wrap text-gray-700 leading-relaxed font-light text-[15px]">
                       {note.content.notes}
                     </div>
                   </div>

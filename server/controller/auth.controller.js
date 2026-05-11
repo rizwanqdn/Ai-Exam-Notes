@@ -12,7 +12,8 @@ export const googleAuth = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: true,
       secure: true,
-      samesite: "none",
+      sameSite: "none",
+      path: "/",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -27,8 +28,9 @@ export const logOut = async (req, res) => {
     // The options (httpOnly, sameSite) should match how the cookie was created
     res.clearCookie("token", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
+      secure: true, // Matched with googleAuth
+      sameSite: "none", // Matched with googleAuth
+      path: "/",
     });
 
     // 2. Send the response back to the client
