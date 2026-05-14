@@ -14,11 +14,7 @@ const PORT = process.env.PORT || 5000;
 app.set("trust proxy", 1);
 app.use(
   cors({
-<<<<<<< HEAD
     origin: process.env.CLIENT_URL,
-=======
-    origin: "https://ai-exam-notes-client-fik1.onrender.com",
->>>>>>> 65f6193ed2e7435745b437ded8ca22741b02f153
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   }),
