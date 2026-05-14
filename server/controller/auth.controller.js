@@ -13,11 +13,7 @@ export const googleAuth = async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-<<<<<<< HEAD
       path: "/",
-=======
-      path:"/",
->>>>>>> 65f6193ed2e7435745b437ded8ca22741b02f153
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
@@ -35,15 +31,9 @@ export const logOut = async (req, res) => {
     // 1. Use res.clearCookie to remove the token from the browser
     // The options (httpOnly, sameSite) should match how the cookie was created
     res.clearCookie("token", {
-<<<<<<< HEAD
       httpOnly: true,
       secure: true, // Matched with googleAuth
       sameSite: "none", // Matched with googleAuth
-=======
-     httpOnly: true,
-      secure: true,       // Matched with googleAuth
-      sameSite: "none",   // Matched with googleAuth
->>>>>>> 65f6193ed2e7435745b437ded8ca22741b02f153
       path: "/",
     });
 
